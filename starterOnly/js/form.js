@@ -8,6 +8,10 @@ const checkbox = document.getElementById('checkbox1');
 
 let valid = true;
 
+const isLettersOnly = (string) => {
+    return /^[a-z][a-z]+$/i.test(string);
+};
+
 const checkFirstName = () => {
     if(!isLettersOnly(firstName.value.trim())) {
         showError(firstName, 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.');
@@ -31,7 +35,7 @@ const checkEmail = () => {
 
 const checkTournamentQuantity = () => {
     if(isNaN(quantity.value) || quantity.value === '') {
-        showError(quantity, 'Veuillez induquer le nombre de tournois.');
+        showError(quantity, 'Veuillez indiquer le nombre de tournois.');
         valid = false;
     } else clearError(quantity);
 }
@@ -61,16 +65,11 @@ const checkTermsOfService = () => {
 
 const checkBirthdayDate = () => {
     let date = new Date(birthdate);
-    if(!date instanceof Date || isNaN(date)) {
-        console.log(birthdate.value.toString());
-        console.log(date);
+    console.log(Date.parse(birthdate.value));
+    if(isNaN(Date.parse(birthdate.value))) {
         showError(birthdate, 'Vous devez entrer votre date de naissance.');
-        // valid = false;
-    } /*else clearError(birthdate);*/
-};
-
-const isLettersOnly = (string) => {
-    return /^[a-z][a-z]+$/i.test(string);
+        valid = false;
+    } else clearError(birthdate);
 };
 
 const validate = (event) => {
@@ -82,6 +81,8 @@ const validate = (event) => {
     checkTournamentQuantity();
     checkLocation();
     checkTermsOfService();
+
+    checkBirthdayDate();
 
     console.log(`form is ${valid ? 'valid' : 'invalid'}`);
 
