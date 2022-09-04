@@ -1,3 +1,4 @@
+// Build the validation message
 const showValidationMessage = () => {
 
     disableCheckboxTransition();
@@ -9,11 +10,13 @@ const showValidationMessage = () => {
     document.querySelector('.modal-body').appendChild(validationMessage);
 };
 
+// Set checkbox transitions to 0s
 const disableCheckboxTransition = () => {
     document.querySelectorAll('span.checkbox-icon')
             .forEach((element) => element.style.transitionDuration = "0s");
 };
 
+// Add a close button to the validation message
 const showCloseButton = () => {
     const closeValidationButton = document.createElement('button');
     closeValidationButton.textContent = "Fermer";
