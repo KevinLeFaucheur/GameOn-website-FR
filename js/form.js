@@ -65,7 +65,7 @@ const form = [
     }
 ];
 
-// 
+// Decide to show or clear error upon validation() result is true or false
 const validateInput = (element, message, validation) => {
 
     if(!validation) {
@@ -74,23 +74,18 @@ const validateInput = (element, message, validation) => {
     } else clearError(element);
 };
 
-// Form validation function, check if valid stay true for each input
+// Loop through each inputs of the form object, show validation if valid stay true
 const validate = (event) => {
     valid = true;
 
     for(let item in form) {
         if(Array.isArray(form[item].element)) {
-            console.log('is array');
             validateInput(form[item].element[0], form[item].errorMessage, form[item].validation());
         } else validateInput(form[item].element, form[item].errorMessage, form[item].validation());
     }
 
-    console.log(`form is ${valid ? 'valid' : 'invalid'}`);
-
     if(valid) {
         showValidationMessage();
         showCloseButton();
-    } /*else { event.preventDefault(); }*/
-
-    // return false;
+    }
 }
